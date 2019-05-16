@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Transform: AWS::Serverless-2016-10-31
+
+Description: >-
+  A Hello, World app for AWS Lambda. 
+  Written in Scala, compiled with the GraalVM and executed with the AWS Lambda Custom Runtime.
+
+Resources:
+  HelloScalaGraalvmFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: HelloScalaGraalvm
+      Description: Lambda function with custom runtime
+      Runtime: provided
+      Handler: bootstrap
+      CodeUri: dist/
+      MemorySize: 512
+      Timeout: 15
+      Events:
+        Hello:
+          Type: Api
+          Properties:
+            Path: /hello/{name}
+            Method: GET
+        
+Outputs:
+    ApiURL:
+      Description: "API endpoint URL for Prod environment"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/{name}"
