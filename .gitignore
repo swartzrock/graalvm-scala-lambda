@@ -2,7 +2,11 @@
 *.class
 *.idea
 target
-*.idea
 *.iml
 packaged.yaml
 dist
+.bloop
+.metals
+.vscode
+metals.sbt
+/.bsp/sbt.json
