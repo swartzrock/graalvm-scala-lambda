@@ -12,7 +12,7 @@ object bootstrap {
     while (true) {
       val r = requests.get(nextEventUrl)
       val statusCode = for {
-        requestEvent <- RequestEvent.fromJsonSafe(r.text)
+        requestEvent <- RequestEvent.fromJsonSafe(r.text())
         deadlineMs <- getRequiredHeader(r, "lambda-runtime-deadline-ms").map(_.toLong)
         requestId <- getRequiredHeader(r, "lambda-runtime-aws-request-id")
         statusCode = handleRequest(runtimeApiHost, requestEvent, requestId, deadlineMs)

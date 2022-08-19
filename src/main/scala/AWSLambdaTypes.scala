@@ -44,7 +44,7 @@ case class RequestEvent(
 )
 
 object RequestEvent {
-  private implicit val codec: JsonValueCodec[RequestEvent] = JsonCodecMaker.make[RequestEvent](CodecMakerConfig())
+  private implicit val codec: JsonValueCodec[RequestEvent] = JsonCodecMaker.make
 
   def fromJsonSafe(s: String): Option[RequestEvent] = Try(readFromString[RequestEvent](s)) match {
     case util.Success(re) => Some(re)
@@ -59,10 +59,7 @@ case class LambdaResponse(
   body: String,
   isBase64Encoded: Boolean = false
 ) {
-  private implicit val codec: JsonValueCodec[LambdaResponse] = JsonCodecMaker.make[LambdaResponse](CodecMakerConfig())
+  private implicit val codec: JsonValueCodec[LambdaResponse] = JsonCodecMaker.make
 
   def toJson: String = writeToString(this)
 }
-
-
-
